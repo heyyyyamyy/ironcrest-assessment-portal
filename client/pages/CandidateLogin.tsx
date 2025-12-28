@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { UserCheck, ArrowLeft } from 'lucide-react';
+import { api } from '../services/apiService';
+
+const CandidateLogin: React.FC = () => {
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    const form = e.target as HTMLFormElement;
+    const userId = (form.elements.namedItem('userId') as HTMLInputElement).value.trim();
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value.trim();
+
+    try {
+      const result = await api.login({ id: userId, password });
+      if (result.user.role === 'CANDIDATE') {
+        navigate('/candidate/profile');
+      } else {
+        setError('Access denied. Candidate account required.');
+      }
+    } catch (err: any) {
+      setError(err?.message ? String(err.message) : 'Invalid ID or Password.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 relative">
+      <Link to="/" className="absolute top-8 left-8 flex items-center gap-2 text-slate-500 hover:text-brand-600 transition-colors text-sm font-medium">
+        <ArrowLeft size={16} /> Back to Home
+      </Link>
+
+      <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-full max-w-sm border border-slate-100">
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center mb-4 text-brand-600">
+            <UserCheck size={24} />
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900">Candidate Login</h2>
+          <p className="text-slate-500 text-sm">Enter your exam credentials</p>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">User ID</label>
+            <input 
+              name="userId" 
+              type="text" 
+              className="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+              placeholder="IC-XXXX"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Password</label>
+            <input 
+              name="password" 
+              type="password" 
+              className="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          
+          {error && (
+            <div className="p-3 bg-red-50 text-red-600 text-xs rounded-lg border border-red-100 text-center font-medium">
+                {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white py-2.5 rounded-lg transition-all font-semibold shadow-md active:scale-[0.98] disabled:cursor-not-allowed"
+          >
+            {loading ? 'Signing in...' : 'Access Portal'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default CandidateLogin;

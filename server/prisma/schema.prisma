@@ -1,0 +1,54 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(uuid())
+  username         String?  @unique // For Admins
+  password         String   // Hashed
+  role             String   // 'ADMIN' | 'CANDIDATE'
+
+  // Candidate Specific Fields
+  name             String?
+  designation      String?
+  email            String?
+  experience       String?
+  phone            String?
+  location         String?
+  qualification    String?
+  portfolioUrl     String?
+  idProofUrl       String?
+  profileCompleted Boolean  @default(false)
+
+  // Assessment State
+  assignedAssessmentId String?
+  assessmentStatus     String   @default("PENDING") // PENDING, COMPLETED, TERMINATED
+  scorePercentage      Float?
+
+  createdAt        DateTime @default(now())
+}
+
+model Assessment {
+  id              String     @id @default(uuid())
+  name            String
+  durationMinutes Int
+  questions       Question[]
+}
+
+model Question {
+  id                 String     @id @default(uuid())
+  text               String
+  type               String     // MCQ, WRITTEN
+  section            String
+  options            String     // Store JSON string of options array
+  correctOptionIndex Int?
+  assessmentId       String
+  assessment         Assessment @relation(fields: [assessmentId], references: [id])
+}

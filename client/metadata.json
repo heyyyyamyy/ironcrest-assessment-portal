@@ -1,0 +1,7 @@
+{
+  "name": "Ironcrest Recruitment Assessment Round",
+  "description": "A secure, role-based interview assessment portal for IronCrest Developers.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
