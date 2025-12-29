@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Lock, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { api } from '../services/apiService';
 
 const AdminLogin: React.FC = () => {
@@ -39,19 +39,17 @@ const AdminLogin: React.FC = () => {
 
       <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-full max-w-sm border border-slate-100">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center mb-4 text-brand-600">
-            <Lock size={24} />
-          </div>
+          <img src="/logo.png" alt="IronCrest Logo" className="w-24 h-24 mb-4 object-contain" />
           <h2 className="text-2xl font-bold text-slate-900">Admin Access</h2>
           <p className="text-slate-500 text-sm">Please enter your credentials</p>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Username</label>
-            <input 
-              name="username" 
-              type="text" 
+            <input
+              name="username"
+              type="text"
               className="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
               placeholder="admin"
               required
@@ -59,18 +57,18 @@ const AdminLogin: React.FC = () => {
           </div>
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Password</label>
-            <input 
-              name="password" 
-              type="password" 
+            <input
+              name="password"
+              type="password"
               className="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
               placeholder="••••••••"
               required
             />
           </div>
-          
+
           {error && (
             <div className="p-3 bg-red-50 text-red-600 text-xs rounded-lg border border-red-100 text-center font-medium">
-                {error}
+              {error}
             </div>
           )}
 

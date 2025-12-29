@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserCheck, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { api } from '../services/apiService';
 
 const CandidateLogin: React.FC = () => {
@@ -39,9 +39,7 @@ const CandidateLogin: React.FC = () => {
 
       <div className="bg-white p-10 rounded-2xl shadow-xl shadow-slate-200/50 w-full max-w-sm border border-slate-100">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center mb-4 text-brand-600">
-            <UserCheck size={24} />
-          </div>
+          <img src="/logo.png" alt="IronCrest Logo" className="w-24 h-24 mb-4 object-contain" />
           <h2 className="text-2xl font-bold text-slate-900">Candidate Login</h2>
           <p className="text-slate-500 text-sm">Enter your exam credentials</p>
         </div>
