@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, User, Building2, ChevronRight } from 'lucide-react';
+import { ShieldCheck, User, ChevronRight } from 'lucide-react';
 
 const Landing: React.FC = () => {
   return (
@@ -11,9 +11,7 @@ const Landing: React.FC = () => {
 
       <div className="w-full max-w-md p-8 relative z-10">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl shadow-xl shadow-brand-100/50 mb-6 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-             <Building2 className="w-10 h-10 text-brand-600" />
-          </div>
+          <img src="/logo.png" alt="IronCrest Logo" className="w-32 h-32 mx-auto mb-4 object-contain" />
           <h1 className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">IronCrest</h1>
           <p className="text-slate-500 font-medium">Assessment Portal</p>
         </div>
