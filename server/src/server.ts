@@ -23,7 +23,7 @@ export const prisma = new PrismaClient();
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : true, // Allow all in dev
+  origin: process.env.CORS_ORIGIN ?? true,
   credentials: true
 }));
 app.use(morgan('combined'));
