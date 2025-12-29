@@ -474,7 +474,7 @@ class MockDB {
   login(idOrUsername: string, password?: string): User | null {
     const users = this.getUsers();
     // Admin check
-    if (idOrUsername === 'admin' && password === 'admin123') { // Simple hardcoded for demo
+    if (idOrUsername === 'admin' && password === 'w8FZyCWb7Q8JliZ1iAlP6A') { // Simple hardcoded for demo
         const admin = users.find(u => u.role === UserRole.ADMIN);
         if (admin) {
             localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(admin));
